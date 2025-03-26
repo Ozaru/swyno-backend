@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { PessoaModule } from './pessoa/pessoa.module';
+import { MovimentoModule } from './movimento/movimento.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Pessoa } from './pessoa/pessoa.entity';
+import { Movimento } from './movimento/movimento.entity';
+import { Extrato } from './extrato/extrato.entity';
+import { ExtratoModule } from './extrato/extrato.module';
+import { Rateio } from './rateio/rateio.entity';
+import { RateioModule } from './rateio/rateio.module';
 
 @Module({
   imports: [
@@ -12,12 +15,16 @@ import { Pessoa } from './pessoa/pessoa.entity';
       database: 'database/swyno.sqlite',
       synchronize: true,
       entities: [
-        Pessoa
+        Movimento,
+        Extrato,
+        Rateio,
       ],
     }),
-    PessoaModule,
+    MovimentoModule,
+    ExtratoModule,
+    RateioModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
